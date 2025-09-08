@@ -59,6 +59,11 @@ class TableTennisTracker {
             this.recordPoint();
         });
 
+        // Export button
+        document.getElementById('export-data').addEventListener('click', () => {
+            this.exportToCSV();
+        });
+
         // Navigation buttons
         document.getElementById('view-stats').addEventListener('click', () => {
             this.showStatsPage();
@@ -130,6 +135,66 @@ class TableTennisTracker {
         
         // Start the game
         this.startNewGame();
+        
+        // Add sample test data
+        this.addTestData();
+    }
+
+    addTestData() {
+        if (!this.currentGame) return;
+
+        // Sample test data as provided
+        const testPoints = [
+            { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'BH' },
+            { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'BH' },
+            { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'BH' },
+            { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'BH' },
+            { winner: 'X', reason: 'serve', xHit: 'FH', yHit: 'BH' },
+            { winner: 'X', reason: 'serve', xHit: 'FH', yHit: 'BH' },
+            { winner: 'X', reason: 'serve', xHit: 'FH', yHit: 'BH' },
+            { winner: 'X', reason: 'x-miss-net', xHit: 'BH', yHit: 'FH' },
+            { winner: 'X', reason: 'y-miss-net', xHit: 'BH', yHit: 'FH' },
+            { winner: 'X', reason: 'y-miss-over', xHit: 'BH', yHit: 'FH' },
+            { winner: 'Y', reason: 'attack', xHit: 'BH', yHit: 'BH' },
+            { winner: 'Y', reason: 'attack', xHit: 'BH', yHit: 'BH' },
+            { winner: 'Y', reason: 'attack', xHit: 'BH', yHit: 'BH' },
+            { winner: 'Y', reason: 'serve', xHit: 'BH', yHit: 'BH' },
+            { winner: 'Y', reason: 'serve', xHit: 'BH', yHit: 'BH' },
+            { winner: 'Y', reason: 'x-miss-net', xHit: 'FH', yHit: 'FH' },
+            { winner: 'Y', reason: 'x-miss-over', xHit: 'FH', yHit: 'FH' },
+            { winner: 'Y', reason: 'x-miss-over', xHit: 'FH', yHit: 'FH' },
+            { winner: 'Y', reason: 'lucky', xHit: 'FH', yHit: 'FH' },
+            { winner: 'X', reason: 'lucky', xHit: 'FH', yHit: 'FH' }
+        ];
+
+        // Add test points to current game
+        testPoints.forEach((pointData, index) => {
+            const point = {
+                id: Date.now() + index,
+                winner: pointData.winner,
+                xWonReason: pointData.winner === 'X' ? pointData.reason : null,
+                yWonReason: pointData.winner === 'Y' ? pointData.reason : null,
+                xHit: pointData.xHit,
+                yHit: pointData.yHit,
+                timestamp: new Date()
+            };
+
+            this.currentGame.points.push(point);
+
+            // Update scores
+            if (point.winner === 'X') {
+                this.currentGame.playerScore++;
+            } else {
+                this.currentGame.opponentScore++;
+            }
+
+            // Update stats
+            this.updateGameStats(point);
+        });
+
+        // Update display
+        this.updateScoreDisplay();
+        this.updateStats();
     }
 
     selectWinner(winner) {
@@ -420,6 +485,88 @@ class TableTennisTracker {
         if (saved) {
             this.gameHistory = JSON.parse(saved);
         }
+    }
+
+    exportToCSV() {
+        if (!this.currentGame || this.currentGame.points.length === 0) {
+            alert('No game data to export. Please record some points first.');
+            return;
+        }
+
+        // Generate CSV content
+        const csvContent = this.generateCSV();
+        
+        // Create and download CSV file
+        this.downloadCSV(csvContent);
+        
+        // Send email (simulated)
+        this.sendEmail(csvContent);
+    }
+
+    generateCSV() {
+        const headers = ['Point #', 'Who won', 'Reason', 'X\'s last hit', 'Y\'s last hit'];
+        const rows = [headers.join(',')];
+
+        this.currentGame.points.forEach((point, index) => {
+            const pointNumber = index + 1;
+            const whoWon = point.winner;
+            
+            // Determine reason based on who won
+            let reason = '';
+            if (point.winner === 'X') {
+                reason = this.formatReason(point.xWonReason);
+            } else {
+                reason = this.formatReason(point.yWonReason);
+            }
+            
+            const xHit = point.xHit;
+            const yHit = point.yHit;
+            
+            rows.push([pointNumber, whoWon, reason, xHit, yHit].join(','));
+        });
+
+        return rows.join('\n');
+    }
+
+    formatReason(reason) {
+        const reasonMap = {
+            'attack': 'attack',
+            'lucky': 'lucky',
+            'serve': 'serve',
+            'x-miss-net': 'miss net',
+            'x-miss-over': 'miss over',
+            'y-miss-net': 'Y miss net',
+            'y-miss-over': 'Y miss over'
+        };
+        return reasonMap[reason] || reason;
+    }
+
+    downloadCSV(csvContent) {
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        
+        link.setAttribute('href', url);
+        link.setAttribute('download', `table_tennis_${this.currentGame.opponentId}_${this.currentGame.event}_game${this.currentGame.gameNumber}.csv`);
+        link.style.visibility = 'hidden';
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    sendEmail(csvContent) {
+        // Create email content
+        const subject = `Table Tennis Stats - ${this.currentGame.opponentId} vs ${this.currentGame.event} Game ${this.currentGame.gameNumber}`;
+        const body = `Please find attached the table tennis match data.\n\nGame Details:\n- Opponent: ${this.currentGame.opponentId}\n- Event: ${this.currentGame.event}\n- Game: ${this.currentGame.gameNumber}\n- Final Score: ${this.currentGame.playerScore} - ${this.currentGame.opponentScore}\n- Total Points: ${this.currentGame.points.length}\n\nCSV Data:\n${csvContent}`;
+        
+        // Create mailto link
+        const mailtoLink = `mailto:liviachang@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        // Open email client
+        window.open(mailtoLink);
+        
+        alert('CSV file downloaded and email client opened. Please send the email to liviachang@gmail.com');
     }
 }
 
