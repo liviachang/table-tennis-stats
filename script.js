@@ -296,15 +296,18 @@ class TableTennisTracker {
             btn.classList.remove('selected');
         });
         document.querySelector(`#reason-section [data-reason="${reason}"]`).classList.add('selected');
+        
+        // Show hit section
+        this.showHitSection();
     }
 
     selectHitType(player, type) {
-        if (player === 'x') {
+        if (player === 'X') {
             this.currentSelection.xHit = type;
         } else {
             this.currentSelection.yHit = type;
         }
-
+        
         // Update button states
         document.querySelectorAll(`[data-hit="${player}"]`).forEach(btn => {
             btn.classList.remove('selected');
@@ -316,6 +319,13 @@ class TableTennisTracker {
         const reasonSection = document.getElementById('reason-section');
         if (reasonSection) {
             reasonSection.classList.remove('hidden');
+        }
+    }
+
+    showHitSection() {
+        const hitSection = document.getElementById('hit-section');
+        if (hitSection) {
+            hitSection.classList.remove('hidden');
         }
     }
 
@@ -496,8 +506,9 @@ class TableTennisTracker {
             btn.classList.remove('selected');
         });
 
-        // Hide reason section
+        // Hide reason and hit sections
         document.getElementById('reason-section').classList.add('hidden');
+        document.getElementById('hit-section').classList.add('hidden');
     }
 
     showQuestionsPage() {

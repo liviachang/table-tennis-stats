@@ -260,6 +260,20 @@ header h1 {
     margin: 8px 0;
 }
 
+.question-section {
+    margin-bottom: 15px;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 8px;
+    border: 2px solid #e2e8f0;
+}
+
+.question-section h3 {
+    margin: 0 0 15px 0;
+    color: #2d3748;
+    font-size: 18px;
+}
+
 .point-tracking h3, .point-tracking h4 {
     color: #4a5568;
     margin-bottom: 12px;

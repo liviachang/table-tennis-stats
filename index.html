@@ -68,15 +68,18 @@
 
             <!-- Point Tracking Questions -->
             <div class="point-tracking">
-                <h3>Who won the point?</h3>
-                <div class="button-grid winner-buttons">
-                    <button class="option-btn" data-winner="X">X (You)</button>
-                    <button class="option-btn" data-winner="Y">Y (Opponent)</button>
+                <!-- Question 1: Who won -->
+                <div class="question-section">
+                    <h3>1. Who won the point?</h3>
+                    <div class="button-grid winner-buttons">
+                        <button class="option-btn" data-winner="X">X (You)</button>
+                        <button class="option-btn" data-winner="Y">Y (Opponent)</button>
+                    </div>
                 </div>
 
-                <!-- Reason options (same for both X and Y) -->
-                <div id="reason-section" class="reason-section hidden">
-                    <h4>Why did they win?</h4>
+                <!-- Question 2: Reason -->
+                <div id="reason-section" class="question-section hidden">
+                    <h3>2. Reason:</h3>
                     <div class="button-grid reason-buttons">
                         <button class="option-btn" data-reason="serve">Serve</button>
                         <button class="option-btn" data-reason="attack">Attack</button>
@@ -86,21 +89,23 @@
                     </div>
                 </div>
 
-                <!-- Hit types -->
-                <div class="hit-types">
-                    <h4>Hit types:</h4>
-                    <div class="hit-group">
-                        <label>Your hit:</label>
-                        <div class="button-grid hit-buttons">
-                            <button class="option-btn" data-hit="x" data-type="FH">FH</button>
-                            <button class="option-btn" data-hit="x" data-type="BH">BH</button>
+                <!-- Question 3: Hit types -->
+                <div id="hit-section" class="question-section hidden">
+                    <h3>3. Last hit:</h3>
+                    <div class="hit-types">
+                        <div class="hit-group">
+                            <label>X (You):</label>
+                            <div class="button-grid hit-buttons">
+                                <button class="option-btn" data-hit="X" data-type="FH">X FH</button>
+                                <button class="option-btn" data-hit="X" data-type="BH">X BH</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="hit-group">
-                        <label>Y's hit:</label>
-                        <div class="button-grid hit-buttons">
-                            <button class="option-btn" data-hit="y" data-type="FH">FH</button>
-                            <button class="option-btn" data-hit="y" data-type="BH">BH</button>
+                        <div class="hit-group">
+                            <label>Y (Opponent):</label>
+                            <div class="button-grid hit-buttons">
+                                <button class="option-btn" data-hit="Y" data-type="FH">Y FH</button>
+                                <button class="option-btn" data-hit="Y" data-type="BH">Y BH</button>
+                            </div>
                         </div>
                     </div>
                 </div>
