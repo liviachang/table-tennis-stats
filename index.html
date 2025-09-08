@@ -55,60 +55,58 @@
             </div>
 
             <!-- Point Tracking Form -->
-            <form id="point-form">
-                <div class="point-tracking">
-                    <h3>Who won the point?</h3>
-                    <div class="radio-group">
-                        <label><input type="radio" name="winner" value="X" required> You (X)</label>
-                        <label><input type="radio" name="winner" value="Y" required> Opponent (Y)</label>
-                    </div>
-
-                    <!-- X won reasons -->
-                    <div id="x-won-reasons" class="reason-section hidden">
-                        <h4>Why you won?</h4>
-                        <div class="radio-group">
-                            <label><input type="radio" name="x-won-reason" value="attack"> Attack</label>
-                            <label><input type="radio" name="x-won-reason" value="lucky"> Lucky</label>
-                            <label><input type="radio" name="x-won-reason" value="y-miss-net"> Y miss net</label>
-                            <label><input type="radio" name="x-won-reason" value="y-miss-over"> Y miss over</label>
-                            <label><input type="radio" name="x-won-reason" value="serve"> Serve</label>
-                        </div>
-                    </div>
-
-                    <!-- Y won reasons -->
-                    <div id="y-won-reasons" class="reason-section hidden">
-                        <h4>Why Y won?</h4>
-                        <div class="radio-group">
-                            <label><input type="radio" name="y-won-reason" value="attack"> Y attack</label>
-                            <label><input type="radio" name="y-won-reason" value="lucky"> Y lucky</label>
-                            <label><input type="radio" name="y-won-reason" value="x-miss-net"> X miss net</label>
-                            <label><input type="radio" name="y-won-reason" value="x-miss-over"> X miss over</label>
-                            <label><input type="radio" name="y-won-reason" value="serve"> Y serve</label>
-                        </div>
-                    </div>
-
-                    <!-- Hit types -->
-                    <div class="hit-types">
-                        <h4>Hit types:</h4>
-                        <div class="hit-group">
-                            <label>Your hit:</label>
-                            <div class="radio-group">
-                                <label><input type="radio" name="x-hit" value="FH"> FH</label>
-                                <label><input type="radio" name="x-hit" value="BH"> BH</label>
-                            </div>
-                        </div>
-                        <div class="hit-group">
-                            <label>Y's hit:</label>
-                            <div class="radio-group">
-                                <label><input type="radio" name="y-hit" value="FH"> FH</label>
-                                <label><input type="radio" name="y-hit" value="BH"> BH</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-success">Record Point</button>
+            <div class="point-tracking">
+                <h3>Who won the point?</h3>
+                <div class="button-grid winner-buttons">
+                    <button class="option-btn" data-winner="X">X (You)</button>
+                    <button class="option-btn" data-winner="Y">Y (Opponent)</button>
                 </div>
-            </form>
+
+                <!-- X won reasons -->
+                <div id="x-won-reasons" class="reason-section hidden">
+                    <h4>Why you won?</h4>
+                    <div class="button-grid reason-buttons">
+                        <button class="option-btn" data-reason="serve">Serve</button>
+                        <button class="option-btn" data-reason="attack">Attack</button>
+                        <button class="option-btn" data-reason="y-miss-net">Y miss net</button>
+                        <button class="option-btn" data-reason="y-miss-over">Y miss over</button>
+                        <button class="option-btn" data-reason="lucky">Lucky</button>
+                    </div>
+                </div>
+
+                <!-- Y won reasons -->
+                <div id="y-won-reasons" class="reason-section hidden">
+                    <h4>Why Y won?</h4>
+                    <div class="button-grid reason-buttons">
+                        <button class="option-btn" data-reason="serve">Y serve</button>
+                        <button class="option-btn" data-reason="attack">Y attack</button>
+                        <button class="option-btn" data-reason="x-miss-net">X miss net</button>
+                        <button class="option-btn" data-reason="x-miss-over">X miss over</button>
+                        <button class="option-btn" data-reason="lucky">Y lucky</button>
+                    </div>
+                </div>
+
+                <!-- Hit types -->
+                <div class="hit-types">
+                    <h4>Hit types:</h4>
+                    <div class="hit-group">
+                        <label>Your hit:</label>
+                        <div class="button-grid hit-buttons">
+                            <button class="option-btn" data-hit="x" data-type="FH">FH</button>
+                            <button class="option-btn" data-hit="x" data-type="BH">BH</button>
+                        </div>
+                    </div>
+                    <div class="hit-group">
+                        <label>Y's hit:</label>
+                        <div class="button-grid hit-buttons">
+                            <button class="option-btn" data-hit="y" data-type="FH">FH</button>
+                            <button class="option-btn" data-hit="y" data-type="BH">BH</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="record-point" class="btn btn-success">Record Point</button>
+            </div>
 
             <div class="game-controls">
                 <button id="end-game" class="btn btn-danger">End Game</button>

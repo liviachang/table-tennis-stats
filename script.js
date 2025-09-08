@@ -3,6 +3,13 @@ class TableTennisTracker {
     constructor() {
         this.currentGame = null;
         this.gameHistory = [];
+        this.currentSelection = {
+            winner: null,
+            xWonReason: null,
+            yWonReason: null,
+            xHit: null,
+            yHit: null
+        };
         this.initializeEventListeners();
         this.loadGameHistory();
     }
@@ -14,17 +21,37 @@ class TableTennisTracker {
             this.startNewGame();
         });
 
-        // Point tracking form
-        document.getElementById('point-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.recordPoint();
+        // Winner selection buttons
+        document.querySelectorAll('.winner-buttons .option-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.selectWinner(e.target.dataset.winner);
+            });
         });
 
-        // Winner selection change
-        document.querySelectorAll('input[name="winner"]').forEach(radio => {
-            radio.addEventListener('change', (e) => {
-                this.toggleReasonSections(e.target.value);
+        // X won reason buttons
+        document.querySelectorAll('#x-won-reasons .option-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.selectXWonReason(e.target.dataset.reason);
             });
+        });
+
+        // Y won reason buttons
+        document.querySelectorAll('#y-won-reasons .option-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.selectYWonReason(e.target.dataset.reason);
+            });
+        });
+
+        // Hit type buttons
+        document.querySelectorAll('.hit-buttons .option-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.selectHitType(e.target.dataset.hit, e.target.dataset.type);
+            });
+        });
+
+        // Record point button
+        document.getElementById('record-point').addEventListener('click', () => {
+            this.recordPoint();
         });
 
         // Game controls
@@ -81,6 +108,60 @@ class TableTennisTracker {
         this.updateStats();
     }
 
+    selectWinner(winner) {
+        // Clear previous selections
+        this.currentSelection = {
+            winner: winner,
+            xWonReason: null,
+            yWonReason: null,
+            xHit: null,
+            yHit: null
+        };
+
+        // Update button states
+        document.querySelectorAll('.winner-buttons .option-btn').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        document.querySelector(`[data-winner="${winner}"]`).classList.add('selected');
+
+        // Show appropriate reason section
+        this.toggleReasonSections(winner);
+    }
+
+    selectXWonReason(reason) {
+        this.currentSelection.xWonReason = reason;
+        
+        // Update button states
+        document.querySelectorAll('#x-won-reasons .option-btn').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        document.querySelector(`#x-won-reasons [data-reason="${reason}"]`).classList.add('selected');
+    }
+
+    selectYWonReason(reason) {
+        this.currentSelection.yWonReason = reason;
+        
+        // Update button states
+        document.querySelectorAll('#y-won-reasons .option-btn').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        document.querySelector(`#y-won-reasons [data-reason="${reason}"]`).classList.add('selected');
+    }
+
+    selectHitType(player, type) {
+        if (player === 'x') {
+            this.currentSelection.xHit = type;
+        } else {
+            this.currentSelection.yHit = type;
+        }
+
+        // Update button states
+        document.querySelectorAll(`[data-hit="${player}"]`).forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        document.querySelector(`[data-hit="${player}"][data-type="${type}"]`).classList.add('selected');
+    }
+
     toggleReasonSections(winner) {
         const xWonReasons = document.getElementById('x-won-reasons');
         const yWonReasons = document.getElementById('y-won-reasons');
@@ -97,16 +178,11 @@ class TableTennisTracker {
     recordPoint() {
         if (!this.currentGame) return;
 
-        const formData = new FormData(document.getElementById('point-form'));
-        const winner = formData.get('winner');
-        const xWonReason = formData.get('x-won-reason');
-        const yWonReason = formData.get('y-won-reason');
-        const xHit = formData.get('x-hit');
-        const yHit = formData.get('y-hit');
+        const { winner, xWonReason, yWonReason, xHit, yHit } = this.currentSelection;
 
         // Validate required fields
         if (!winner || !xHit || !yHit) {
-            alert('Please fill in all required fields');
+            alert('Please select all required options');
             return;
         }
 
@@ -258,7 +334,21 @@ class TableTennisTracker {
     }
 
     resetPointForm() {
-        document.getElementById('point-form').reset();
+        // Reset selection state
+        this.currentSelection = {
+            winner: null,
+            xWonReason: null,
+            yWonReason: null,
+            xHit: null,
+            yHit: null
+        };
+
+        // Clear all button selections
+        document.querySelectorAll('.option-btn').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+
+        // Hide reason sections
         document.getElementById('x-won-reasons').classList.add('hidden');
         document.getElementById('y-won-reasons').classList.add('hidden');
     }
