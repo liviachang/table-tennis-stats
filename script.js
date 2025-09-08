@@ -33,17 +33,10 @@ class TableTennisTracker {
             });
         });
 
-        // X won reason buttons
-        document.querySelectorAll('#x-won-reasons .option-btn').forEach(btn => {
+        // Reason buttons (unified for both X and Y)
+        document.querySelectorAll('#reason-section .option-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                this.selectXWonReason(e.target.dataset.reason);
-            });
-        });
-
-        // Y won reason buttons
-        document.querySelectorAll('#y-won-reasons .option-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                this.selectYWonReason(e.target.dataset.reason);
+                this.selectReason(e.target.dataset.reason);
             });
         });
 
@@ -201,8 +194,7 @@ class TableTennisTracker {
         // Clear previous selections
         this.currentSelection = {
             winner: winner,
-            xWonReason: null,
-            yWonReason: null,
+            reason: null,
             xHit: null,
             yHit: null
         };
@@ -213,28 +205,18 @@ class TableTennisTracker {
         });
         document.querySelector(`[data-winner="${winner}"]`).classList.add('selected');
 
-        // Show appropriate reason section
-        this.toggleReasonSections(winner);
+        // Show reason section
+        this.showReasonSection();
     }
 
-    selectXWonReason(reason) {
-        this.currentSelection.xWonReason = reason;
+    selectReason(reason) {
+        this.currentSelection.reason = reason;
         
         // Update button states
-        document.querySelectorAll('#x-won-reasons .option-btn').forEach(btn => {
+        document.querySelectorAll('#reason-section .option-btn').forEach(btn => {
             btn.classList.remove('selected');
         });
-        document.querySelector(`#x-won-reasons [data-reason="${reason}"]`).classList.add('selected');
-    }
-
-    selectYWonReason(reason) {
-        this.currentSelection.yWonReason = reason;
-        
-        // Update button states
-        document.querySelectorAll('#y-won-reasons .option-btn').forEach(btn => {
-            btn.classList.remove('selected');
-        });
-        document.querySelector(`#y-won-reasons [data-reason="${reason}"]`).classList.add('selected');
+        document.querySelector(`#reason-section [data-reason="${reason}"]`).classList.add('selected');
     }
 
     selectHitType(player, type) {
@@ -251,46 +233,32 @@ class TableTennisTracker {
         document.querySelector(`[data-hit="${player}"][data-type="${type}"]`).classList.add('selected');
     }
 
-    toggleReasonSections(winner) {
-        const xWonReasons = document.getElementById('x-won-reasons');
-        const yWonReasons = document.getElementById('y-won-reasons');
-
-        if (winner === 'X') {
-            xWonReasons.classList.remove('hidden');
-            yWonReasons.classList.add('hidden');
-        } else {
-            xWonReasons.classList.add('hidden');
-            yWonReasons.classList.remove('hidden');
-        }
+    showReasonSection() {
+        const reasonSection = document.getElementById('reason-section');
+        reasonSection.classList.remove('hidden');
     }
 
     recordPoint() {
         if (!this.currentGame) return;
 
-        const { winner, xWonReason, yWonReason, xHit, yHit } = this.currentSelection;
+        const { winner, reason, xHit, yHit } = this.currentSelection;
 
         // Validate required fields
-        if (!winner || !xHit || !yHit) {
+        if (!winner || !reason || !xHit || !yHit) {
             alert('Please select all required options');
             return;
         }
 
-        if (winner === 'X' && !xWonReason) {
-            alert('Please select why you won the point');
-            return;
-        }
-
-        if (winner === 'Y' && !yWonReason) {
-            alert('Please select why opponent won the point');
-            return;
-        }
+        // Convert unified reason to specific format for stats
+        const xWonReason = winner === 'X' ? this.convertReason(reason, winner) : null;
+        const yWonReason = winner === 'Y' ? this.convertReason(reason, winner) : null;
 
         // Record the point
         const point = {
             id: Date.now(),
             winner,
-            xWonReason: winner === 'X' ? xWonReason : null,
-            yWonReason: winner === 'Y' ? yWonReason : null,
+            xWonReason,
+            yWonReason,
             xHit,
             yHit,
             timestamp: new Date()
@@ -316,6 +284,17 @@ class TableTennisTracker {
             if (Math.abs(this.currentGame.playerScore - this.currentGame.opponentScore) >= 2) {
                 this.endGame();
             }
+        }
+    }
+
+    convertReason(reason, winner) {
+        // Convert unified reason to specific format for stats tracking
+        if (reason === 'miss-net') {
+            return winner === 'X' ? 'x-miss-net' : 'x-miss-net';
+        } else if (reason === 'miss-over') {
+            return winner === 'X' ? 'x-miss-over' : 'x-miss-over';
+        } else {
+            return reason;
         }
     }
 
@@ -426,8 +405,7 @@ class TableTennisTracker {
         // Reset selection state
         this.currentSelection = {
             winner: null,
-            xWonReason: null,
-            yWonReason: null,
+            reason: null,
             xHit: null,
             yHit: null
         };
@@ -437,9 +415,8 @@ class TableTennisTracker {
             btn.classList.remove('selected');
         });
 
-        // Hide reason sections
-        document.getElementById('x-won-reasons').classList.add('hidden');
-        document.getElementById('y-won-reasons').classList.add('hidden');
+        // Hide reason section
+        document.getElementById('reason-section').classList.add('hidden');
     }
 
     showQuestionsPage() {
@@ -533,6 +510,8 @@ class TableTennisTracker {
             'attack': 'attack',
             'lucky': 'lucky',
             'serve': 'serve',
+            'miss-net': 'miss net',
+            'miss-over': 'miss over',
             'x-miss-net': 'miss net',
             'x-miss-over': 'miss over',
             'y-miss-net': 'Y miss net',

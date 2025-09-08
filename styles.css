@@ -140,7 +140,7 @@ header h1 {
 }
 
 .reason-buttons {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .hit-buttons {
