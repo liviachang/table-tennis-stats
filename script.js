@@ -322,15 +322,15 @@ class TableTennisTracker {
         // Debug: Log current selection
         console.log('Current selection:', this.currentSelection);
 
-        // Validate required fields
-        if (!winner || !reason || !xHit || !yHit) {
-            alert(`Please select all required options. Current: winner=${winner}, reason=${reason}, xHit=${xHit}, yHit=${yHit}`);
+        // Only winner is required, other fields are optional
+        if (!winner) {
+            alert('Please select who won the point');
             return;
         }
 
-        // Convert unified reason to specific format for stats
-        const xWonReason = winner === 'X' ? this.convertReason(reason, winner) : null;
-        const yWonReason = winner === 'Y' ? this.convertReason(reason, winner) : null;
+        // Convert unified reason to specific format for stats (if reason is provided)
+        const xWonReason = (winner === 'X' && reason) ? this.convertReason(reason, winner) : null;
+        const yWonReason = (winner === 'Y' && reason) ? this.convertReason(reason, winner) : null;
 
         // Record the point
         const point = {
@@ -369,9 +369,9 @@ class TableTennisTracker {
     convertReason(reason, winner) {
         // Convert unified reason to specific format for stats tracking
         if (reason === 'miss-net') {
-            return winner === 'X' ? 'x-miss-net' : 'x-miss-net';
+            return winner === 'X' ? 'y-miss-net' : 'x-miss-net';
         } else if (reason === 'miss-over') {
-            return winner === 'X' ? 'x-miss-over' : 'x-miss-over';
+            return winner === 'X' ? 'y-miss-over' : 'x-miss-over';
         } else {
             return reason;
         }
@@ -569,13 +569,13 @@ class TableTennisTracker {
             // Determine reason based on who won
             let reason = '';
             if (point.winner === 'X') {
-                reason = this.formatReason(point.xWonReason);
+                reason = point.xWonReason ? this.formatReason(point.xWonReason) : '';
             } else {
-                reason = this.formatReason(point.yWonReason);
+                reason = point.yWonReason ? this.formatReason(point.yWonReason) : '';
             }
             
-            const xHit = point.xHit;
-            const yHit = point.yHit;
+            const xHit = point.xHit || '';
+            const yHit = point.yHit || '';
             
             rows.push([pointNumber, whoWon, reason, xHit, yHit].join(','));
         });
