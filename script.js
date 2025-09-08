@@ -319,9 +319,6 @@ class TableTennisTracker {
 
         const { winner, reason, xHit, yHit } = this.currentSelection;
 
-        // Debug: Log current selection
-        console.log('Current selection:', this.currentSelection);
-
         // Only winner is required, other fields are optional
         if (!winner) {
             alert('Please select who won the point');
