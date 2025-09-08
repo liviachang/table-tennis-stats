@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Tennis Stats Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏓 TT Stats</h1>
+        </header>
+
+        <!-- Game Setup Section -->
+        <section id="game-setup" class="card">
+            <h2>Game Setup</h2>
+            <form id="setup-form">
+                <div class="form-group">
+                    <label for="opponent-id">Opponent:</label>
+                    <input type="text" id="opponent-id" placeholder="A, B, C, D..." required>
+                </div>
+                <div class="form-group">
+                    <label for="event">Event:</label>
+                    <input type="text" id="event" placeholder="U1350, U1500..." required>
+                </div>
+                <div class="form-group">
+                    <label for="game-number">Game #:</label>
+                    <input type="number" id="game-number" placeholder="1, 2, 3..." min="1" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Start Game</button>
+            </form>
+        </section>
+
+        <!-- Game Tracking Section -->
+        <section id="game-tracking" class="card hidden">
+            <h2>Game Tracking</h2>
+            <div class="game-info">
+                <p><strong>Opponent:</strong> <span id="current-opponent"></span></p>
+                <p><strong>Event:</strong> <span id="current-event"></span></p>
+                <p><strong>Game:</strong> <span id="current-game"></span></p>
+            </div>
+
+            <!-- Score Display -->
+            <div class="score-display">
+                <div class="player-score">
+                    <h3>You (X)</h3>
+                    <div class="score" id="player-score">0</div>
+                </div>
+                <div class="vs">VS</div>
+                <div class="opponent-score">
+                    <h3>Opponent (Y)</h3>
+                    <div class="score" id="opponent-score">0</div>
+                </div>
+            </div>
+
+            <!-- Point Tracking Form -->
+            <form id="point-form">
+                <div class="point-tracking">
+                    <h3>Who won the point?</h3>
+                    <div class="radio-group">
+                        <label><input type="radio" name="winner" value="X" required> You (X)</label>
+                        <label><input type="radio" name="winner" value="Y" required> Opponent (Y)</label>
+                    </div>
+
+                    <!-- X won reasons -->
+                    <div id="x-won-reasons" class="reason-section hidden">
+                        <h4>Why you won?</h4>
+                        <div class="radio-group">
+                            <label><input type="radio" name="x-won-reason" value="attack"> Attack</label>
+                            <label><input type="radio" name="x-won-reason" value="lucky"> Lucky</label>
+                            <label><input type="radio" name="x-won-reason" value="y-miss-net"> Y miss net</label>
+                            <label><input type="radio" name="x-won-reason" value="y-miss-over"> Y miss over</label>
+                            <label><input type="radio" name="x-won-reason" value="serve"> Serve</label>
+                        </div>
+                    </div>
+
+                    <!-- Y won reasons -->
+                    <div id="y-won-reasons" class="reason-section hidden">
+                        <h4>Why Y won?</h4>
+                        <div class="radio-group">
+                            <label><input type="radio" name="y-won-reason" value="attack"> Y attack</label>
+                            <label><input type="radio" name="y-won-reason" value="lucky"> Y lucky</label>
+                            <label><input type="radio" name="y-won-reason" value="x-miss-net"> X miss net</label>
+                            <label><input type="radio" name="y-won-reason" value="x-miss-over"> X miss over</label>
+                            <label><input type="radio" name="y-won-reason" value="serve"> Y serve</label>
+                        </div>
+                    </div>
+
+                    <!-- Hit types -->
+                    <div class="hit-types">
+                        <h4>Hit types:</h4>
+                        <div class="hit-group">
+                            <label>Your hit:</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="x-hit" value="FH"> FH</label>
+                                <label><input type="radio" name="x-hit" value="BH"> BH</label>
+                            </div>
+                        </div>
+                        <div class="hit-group">
+                            <label>Y's hit:</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="y-hit" value="FH"> FH</label>
+                                <label><input type="radio" name="y-hit" value="BH"> BH</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Record Point</button>
+                </div>
+            </form>
+
+            <div class="game-controls">
+                <button id="end-game" class="btn btn-danger">End Game</button>
+                <button id="new-game" class="btn btn-secondary">New Game</button>
+            </div>
+        </section>
+
+        <!-- Stats Display Section -->
+        <section id="stats-display" class="card">
+            <h2>Live Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Score</h3>
+                    <div class="stat-value">
+                        <span id="live-player-score">0</span> - <span id="live-opponent-score">0</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Why You Won</h3>
+                    <div class="stat-details">
+                        <div class="stat-item">
+                            <span>Attack:</span>
+                            <span id="x-attack-pct">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Lucky:</span>
+                            <span id="x-lucky-pct">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Y miss net:</span>
+                            <span id="x-y-miss-net-pct">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Y miss over:</span>
+                            <span id="x-y-miss-over-pct">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Serve:</span>
+                            <span id="x-serve-pct">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Why You Lost</h3>
+                    <div class="stat-details">
+                        <div class="stat-item">
+                            <span>Y attack:</span>
+                            <span id="y-attack-pct">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Y lucky:</span>
+                            <span id="y-lucky-pct">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>X miss net:</span>
+                            <span id="y-x-miss-net-pct">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>X miss over:</span>
+                            <span id="y-x-miss-over-pct">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Y serve:</span>
+                            <span id="y-serve-pct">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Hit Distribution</h3>
+                    <div class="stat-details">
+                        <div class="stat-item">
+                            <span>Y's FH when you won:</span>
+                            <span id="y-fh-when-x-won-pct">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Y's BH when you won:</span>
+                            <span id="y-bh-when-x-won-pct">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
