@@ -21,6 +21,11 @@ class TableTennisTracker {
             this.startNewGame();
         });
 
+        // Test mode button
+        document.getElementById('test-mode').addEventListener('click', () => {
+            this.startTestMode();
+        });
+
         // Winner selection buttons
         document.querySelectorAll('.winner-buttons .option-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -52,6 +57,15 @@ class TableTennisTracker {
         // Record point button
         document.getElementById('record-point').addEventListener('click', () => {
             this.recordPoint();
+        });
+
+        // Navigation buttons
+        document.getElementById('view-stats').addEventListener('click', () => {
+            this.showStatsPage();
+        });
+
+        document.getElementById('back-to-questions').addEventListener('click', () => {
+            this.showQuestionsPage();
         });
 
         // Game controls
@@ -104,8 +118,18 @@ class TableTennisTracker {
         };
 
         this.updateGameDisplay();
-        this.showGameTracking();
+        this.showQuestionsPage();
         this.updateStats();
+    }
+
+    startTestMode() {
+        // Set test values
+        document.getElementById('opponent-id').value = 'A';
+        document.getElementById('event').value = 'U1350';
+        document.getElementById('game-number').value = '1';
+        
+        // Start the game
+        this.startNewGame();
     }
 
     selectWinner(winner) {
@@ -353,14 +377,22 @@ class TableTennisTracker {
         document.getElementById('y-won-reasons').classList.add('hidden');
     }
 
-    showGameTracking() {
+    showQuestionsPage() {
         document.getElementById('game-setup').classList.add('hidden');
-        document.getElementById('game-tracking').classList.remove('hidden');
+        document.getElementById('questions-page').classList.remove('hidden');
+        document.getElementById('stats-page').classList.add('hidden');
+    }
+
+    showStatsPage() {
+        document.getElementById('questions-page').classList.add('hidden');
+        document.getElementById('stats-page').classList.remove('hidden');
+        this.updateStats();
     }
 
     resetToSetup() {
         document.getElementById('game-setup').classList.remove('hidden');
-        document.getElementById('game-tracking').classList.add('hidden');
+        document.getElementById('questions-page').classList.add('hidden');
+        document.getElementById('stats-page').classList.add('hidden');
         document.getElementById('setup-form').reset();
         this.currentGame = null;
     }

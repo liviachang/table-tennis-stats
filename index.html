@@ -29,16 +29,19 @@
                     <input type="number" id="game-number" placeholder="1, 2, 3..." min="1" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Start Game</button>
+                <button type="button" id="test-mode" class="btn btn-secondary">Test Mode (A, U1350, G1)</button>
             </form>
         </section>
 
-        <!-- Game Tracking Section -->
-        <section id="game-tracking" class="card hidden">
-            <h2>Game Tracking</h2>
-            <div class="game-info">
-                <p><strong>Opponent:</strong> <span id="current-opponent"></span></p>
-                <p><strong>Event:</strong> <span id="current-event"></span></p>
-                <p><strong>Game:</strong> <span id="current-game"></span></p>
+        <!-- Questions Page -->
+        <section id="questions-page" class="card hidden">
+            <div class="page-header">
+                <h2>Point Tracking</h2>
+                <div class="game-info">
+                    <p><strong>Opponent:</strong> <span id="current-opponent"></span></p>
+                    <p><strong>Event:</strong> <span id="current-event"></span></p>
+                    <p><strong>Game:</strong> <span id="current-game"></span></p>
+                </div>
             </div>
 
             <!-- Score Display -->
@@ -54,7 +57,7 @@
                 </div>
             </div>
 
-            <!-- Point Tracking Form -->
+            <!-- Point Tracking Questions -->
             <div class="point-tracking">
                 <h3>Who won the point?</h3>
                 <div class="button-grid winner-buttons">
@@ -105,7 +108,10 @@
                     </div>
                 </div>
 
-                <button id="record-point" class="btn btn-success">Record Point</button>
+                <div class="action-buttons">
+                    <button id="record-point" class="btn btn-success">Record Point</button>
+                    <button id="view-stats" class="btn btn-primary">View Stats</button>
+                </div>
             </div>
 
             <div class="game-controls">
@@ -114,9 +120,13 @@
             </div>
         </section>
 
-        <!-- Stats Display Section -->
-        <section id="stats-display" class="card">
-            <h2>Live Statistics</h2>
+        <!-- Stats Page -->
+        <section id="stats-page" class="card hidden">
+            <div class="page-header">
+                <h2>Live Statistics</h2>
+                <button id="back-to-questions" class="btn btn-secondary">Back to Questions</button>
+            </div>
+            
             <div class="stats-grid">
                 <div class="stat-card">
                     <h3>Score</h3>
@@ -192,6 +202,7 @@
                 </div>
             </div>
         </section>
+
     </div>
 
     <script src="script.js"></script>
