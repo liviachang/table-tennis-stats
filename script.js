@@ -499,8 +499,8 @@ class TableTennisTracker {
         // Create and download CSV file
         this.downloadCSV(csvContent);
         
-        // Send email (simulated)
-        this.sendEmail(csvContent);
+        // Show CSV data in popup
+        this.showCSVPopup(csvContent);
     }
 
     generateCSV() {
@@ -555,18 +555,137 @@ class TableTennisTracker {
         document.body.removeChild(link);
     }
 
-    sendEmail(csvContent) {
-        // Create email content
-        const subject = `Table Tennis Stats - ${this.currentGame.opponentId} vs ${this.currentGame.event} Game ${this.currentGame.gameNumber}`;
-        const body = `Please find attached the table tennis match data.\n\nGame Details:\n- Opponent: ${this.currentGame.opponentId}\n- Event: ${this.currentGame.event}\n- Game: ${this.currentGame.gameNumber}\n- Final Score: ${this.currentGame.playerScore} - ${this.currentGame.opponentScore}\n- Total Points: ${this.currentGame.points.length}\n\nCSV Data:\n${csvContent}`;
+    showCSVPopup(csvContent) {
+        // Create popup window
+        const popup = window.open('', 'CSVExport', 'width=800,height=600,scrollbars=yes,resizable=yes');
         
-        // Create mailto link
-        const mailtoLink = `mailto:liviachang@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        // Create HTML content for popup
+        const htmlContent = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Table Tennis CSV Export</title>
+                <style>
+                    body {
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        margin: 20px;
+                        background: #f5f5f5;
+                    }
+                    .container {
+                        background: white;
+                        padding: 20px;
+                        border-radius: 10px;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                    }
+                    h1 {
+                        color: #667eea;
+                        margin-bottom: 20px;
+                    }
+                    .game-info {
+                        background: #f7fafc;
+                        padding: 15px;
+                        border-radius: 8px;
+                        margin-bottom: 20px;
+                        border-left: 4px solid #667eea;
+                    }
+                    .csv-container {
+                        background: #f8f9fa;
+                        border: 1px solid #e9ecef;
+                        border-radius: 8px;
+                        padding: 15px;
+                        margin-bottom: 20px;
+                    }
+                    textarea {
+                        width: 100%;
+                        height: 300px;
+                        border: none;
+                        background: transparent;
+                        font-family: 'Courier New', monospace;
+                        font-size: 14px;
+                        line-height: 1.4;
+                        resize: vertical;
+                    }
+                    .buttons {
+                        text-align: center;
+                        margin-top: 20px;
+                    }
+                    button {
+                        background: #667eea;
+                        color: white;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        margin: 0 10px;
+                        font-size: 14px;
+                    }
+                    button:hover {
+                        background: #5a67d8;
+                    }
+                    .copy-success {
+                        color: #48bb78;
+                        font-weight: bold;
+                        margin-left: 10px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>🏓 Table Tennis CSV Export</h1>
+                    
+                    <div class="game-info">
+                        <h3>Game Details</h3>
+                        <p><strong>Opponent:</strong> ${this.currentGame.opponentId}</p>
+                        <p><strong>Event:</strong> ${this.currentGame.event}</p>
+                        <p><strong>Game:</strong> ${this.currentGame.gameNumber}</p>
+                        <p><strong>Final Score:</strong> ${this.currentGame.playerScore} - ${this.currentGame.opponentScore}</p>
+                        <p><strong>Total Points:</strong> ${this.currentGame.points.length}</p>
+                    </div>
+                    
+                    <div class="csv-container">
+                        <h3>CSV Data (Click to select all, then copy)</h3>
+                        <textarea readonly id="csvData">${csvContent}</textarea>
+                    </div>
+                    
+                    <div class="buttons">
+                        <button onclick="copyToClipboard()">Copy to Clipboard</button>
+                        <button onclick="window.close()">Close Window</button>
+                        <span id="copyStatus"></span>
+                    </div>
+                </div>
+                
+                <script>
+                    function copyToClipboard() {
+                        const textarea = document.getElementById('csvData');
+                        textarea.select();
+                        textarea.setSelectionRange(0, 99999); // For mobile devices
+                        
+                        try {
+                            document.execCommand('copy');
+                            document.getElementById('copyStatus').innerHTML = '<span class="copy-success">✓ Copied!</span>';
+                            setTimeout(() => {
+                                document.getElementById('copyStatus').innerHTML = '';
+                            }, 2000);
+                        } catch (err) {
+                            alert('Failed to copy. Please manually select and copy the text.');
+                        }
+                    }
+                    
+                    // Auto-select text when popup opens
+                    window.onload = function() {
+                        document.getElementById('csvData').select();
+                    }
+                </script>
+            </body>
+            </html>
+        `;
         
-        // Open email client
-        window.open(mailtoLink);
+        // Write content to popup
+        popup.document.write(htmlContent);
+        popup.document.close();
         
-        alert('CSV file downloaded and email client opened. Please send the email to liviachang@gmail.com');
+        // Focus the popup
+        popup.focus();
     }
 }
 
