@@ -319,9 +319,12 @@ class TableTennisTracker {
 
         const { winner, reason, xHit, yHit } = this.currentSelection;
 
+        // Debug: Log current selection
+        console.log('Current selection:', this.currentSelection);
+
         // Validate required fields
         if (!winner || !reason || !xHit || !yHit) {
-            alert('Please select all required options');
+            alert(`Please select all required options. Current: winner=${winner}, reason=${reason}, xHit=${xHit}, yHit=${yHit}`);
             return;
         }
 
