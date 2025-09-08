@@ -21,9 +21,18 @@ class TableTennisTracker {
             this.startNewGame();
         });
 
-        // Test mode button
-        document.getElementById('test-mode').addEventListener('click', () => {
-            this.startTestMode();
+        // Test mode buttons
+        document.getElementById('test-mode-1').addEventListener('click', () => {
+            this.startTestMode(1);
+        });
+        document.getElementById('test-mode-2').addEventListener('click', () => {
+            this.startTestMode(2);
+        });
+        document.getElementById('test-mode-3').addEventListener('click', () => {
+            this.startTestMode(3);
+        });
+        document.getElementById('test-mode-4').addEventListener('click', () => {
+            this.startTestMode(4);
         });
 
         // Winner selection buttons
@@ -120,53 +129,123 @@ class TableTennisTracker {
         this.updateStats();
     }
 
-    startTestMode() {
+    startTestMode(gameNumber) {
         // Set test values
         document.getElementById('opponent-id').value = 'A';
         document.getElementById('event').value = 'U1350';
-        document.getElementById('game-number').value = '1';
+        document.getElementById('game-number').value = gameNumber.toString();
         
         // Start the game
         this.startNewGame();
         
-        // Add sample test data
-        this.addTestData();
+        // Add test data for specific game
+        this.addTestData(gameNumber);
     }
 
-    addTestData() {
+    addTestData(gameNumber) {
         if (!this.currentGame) return;
 
-        // Sample test data as provided
-        const testPoints = [
-            { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'BH' },
-            { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'BH' },
-            { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'BH' },
-            { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'BH' },
-            { winner: 'X', reason: 'serve', xHit: 'FH', yHit: 'BH' },
-            { winner: 'X', reason: 'serve', xHit: 'FH', yHit: 'BH' },
-            { winner: 'X', reason: 'serve', xHit: 'FH', yHit: 'BH' },
-            { winner: 'X', reason: 'x-miss-net', xHit: 'BH', yHit: 'FH' },
-            { winner: 'X', reason: 'y-miss-net', xHit: 'BH', yHit: 'FH' },
-            { winner: 'X', reason: 'y-miss-over', xHit: 'BH', yHit: 'FH' },
-            { winner: 'Y', reason: 'attack', xHit: 'BH', yHit: 'BH' },
-            { winner: 'Y', reason: 'attack', xHit: 'BH', yHit: 'BH' },
-            { winner: 'Y', reason: 'attack', xHit: 'BH', yHit: 'BH' },
-            { winner: 'Y', reason: 'serve', xHit: 'BH', yHit: 'BH' },
-            { winner: 'Y', reason: 'serve', xHit: 'BH', yHit: 'BH' },
-            { winner: 'Y', reason: 'x-miss-net', xHit: 'FH', yHit: 'FH' },
-            { winner: 'Y', reason: 'x-miss-over', xHit: 'FH', yHit: 'FH' },
-            { winner: 'Y', reason: 'x-miss-over', xHit: 'FH', yHit: 'FH' },
-            { winner: 'Y', reason: 'lucky', xHit: 'FH', yHit: 'FH' },
-            { winner: 'X', reason: 'lucky', xHit: 'FH', yHit: 'FH' }
-        ];
+        // Test data from CSV file
+        const testData = {
+            1: [
+                { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'BH' },
+                { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'BH' },
+                { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'BH' },
+                { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'BH' },
+                { winner: 'X', reason: 'serve', xHit: 'FH', yHit: 'BH' },
+                { winner: 'X', reason: 'serve', xHit: 'FH', yHit: 'BH' },
+                { winner: 'X', reason: 'serve', xHit: 'FH', yHit: 'BH' },
+                { winner: 'X', reason: 'miss-net', xHit: 'BH', yHit: 'FH' },
+                { winner: 'X', reason: 'miss-net', xHit: 'BH', yHit: 'FH' },
+                { winner: 'X', reason: 'miss-over', xHit: 'BH', yHit: 'FH' },
+                { winner: 'Y', reason: 'attack', xHit: 'BH', yHit: 'BH' },
+                { winner: 'Y', reason: 'attack', xHit: 'BH', yHit: 'BH' },
+                { winner: 'Y', reason: 'attack', xHit: 'BH', yHit: 'BH' },
+                { winner: 'Y', reason: 'serve', xHit: 'BH', yHit: 'BH' },
+                { winner: 'Y', reason: 'serve', xHit: 'BH', yHit: 'BH' },
+                { winner: 'Y', reason: 'miss-net', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'miss-over', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'miss-over', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'lucky', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'lucky', xHit: 'FH', yHit: 'FH' }
+            ],
+            2: [
+                { winner: 'Y', reason: 'attack', xHit: 'FH', yHit: 'BH' },
+                { winner: 'Y', reason: 'attack', xHit: 'FH', yHit: 'BH' },
+                { winner: 'Y', reason: 'attack', xHit: 'FH', yHit: 'BH' },
+                { winner: 'Y', reason: 'attack', xHit: 'FH', yHit: 'BH' },
+                { winner: 'Y', reason: 'serve', xHit: 'FH', yHit: 'BH' },
+                { winner: 'Y', reason: 'serve', xHit: 'FH', yHit: 'BH' },
+                { winner: 'Y', reason: 'serve', xHit: 'FH', yHit: 'BH' },
+                { winner: 'Y', reason: 'miss-net', xHit: 'BH', yHit: 'FH' },
+                { winner: 'Y', reason: 'miss-net', xHit: 'BH', yHit: 'FH' },
+                { winner: 'Y', reason: 'miss-over', xHit: 'BH', yHit: 'FH' },
+                { winner: 'X', reason: 'attack', xHit: 'BH', yHit: 'BH' },
+                { winner: 'X', reason: 'attack', xHit: 'BH', yHit: 'BH' },
+                { winner: 'X', reason: 'attack', xHit: 'BH', yHit: 'BH' },
+                { winner: 'X', reason: 'serve', xHit: 'BH', yHit: 'BH' },
+                { winner: 'X', reason: 'serve', xHit: 'BH', yHit: 'BH' },
+                { winner: 'X', reason: 'miss-net', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'miss-over', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'miss-over', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'lucky', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'lucky', xHit: 'FH', yHit: 'FH' }
+            ],
+            3: [
+                { winner: 'Y', reason: 'attack', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'attack', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'attack', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'attack', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'serve', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'serve', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'serve', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'miss-net', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'miss-net', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'miss-over', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'serve', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'serve', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'miss-net', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'miss-over', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'miss-over', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'lucky', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'lucky', xHit: 'FH', yHit: 'FH' }
+            ],
+            4: [
+                { winner: 'Y', reason: 'attack', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'attack', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'attack', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'attack', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'serve', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'serve', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'serve', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'miss-net', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'miss-net', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'miss-over', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'attack', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'serve', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'serve', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'miss-net', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'miss-over', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'miss-over', xHit: 'FH', yHit: 'FH' },
+                { winner: 'X', reason: 'lucky', xHit: 'FH', yHit: 'FH' },
+                { winner: 'Y', reason: 'lucky', xHit: 'FH', yHit: 'FH' }
+            ]
+        };
 
+        const testPoints = testData[gameNumber] || [];
+        
         // Add test points to current game
         testPoints.forEach((pointData, index) => {
             const point = {
                 id: Date.now() + index,
                 winner: pointData.winner,
-                xWonReason: pointData.winner === 'X' ? pointData.reason : null,
-                yWonReason: pointData.winner === 'Y' ? pointData.reason : null,
+                xWonReason: pointData.winner === 'X' ? this.convertReason(pointData.reason, 'X') : null,
+                yWonReason: pointData.winner === 'Y' ? this.convertReason(pointData.reason, 'Y') : null,
                 xHit: pointData.xHit,
                 yHit: pointData.yHit,
                 timestamp: new Date()
@@ -235,7 +314,9 @@ class TableTennisTracker {
 
     showReasonSection() {
         const reasonSection = document.getElementById('reason-section');
-        reasonSection.classList.remove('hidden');
+        if (reasonSection) {
+            reasonSection.classList.remove('hidden');
+        }
     }
 
     recordPoint() {

@@ -453,6 +453,31 @@ header h1 {
     }
 }
 
+/* Test modes */
+.test-modes {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #e2e8f0;
+}
+
+.test-modes h3 {
+    color: #4a5568;
+    margin-bottom: 10px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.test-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.test-buttons .btn {
+    font-size: 14px;
+    padding: 8px 12px;
+}
+
 /* Utility classes */
 .hidden {
     display: none !important;
