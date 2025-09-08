@@ -284,8 +284,7 @@ class TableTennisTracker {
         });
         document.querySelector(`[data-winner="${winner}"]`).classList.add('selected');
 
-        // Show reason section
-        this.showReasonSection();
+        // Reason section is now always visible
     }
 
     selectReason(reason) {
@@ -297,8 +296,7 @@ class TableTennisTracker {
         });
         document.querySelector(`#reason-section [data-reason="${reason}"]`).classList.add('selected');
         
-        // Show hit section
-        this.showHitSection();
+        // Hit section is now always visible
     }
 
     selectHitType(player, type) {
@@ -315,19 +313,6 @@ class TableTennisTracker {
         document.querySelector(`[data-hit="${player}"][data-type="${type}"]`).classList.add('selected');
     }
 
-    showReasonSection() {
-        const reasonSection = document.getElementById('reason-section');
-        if (reasonSection) {
-            reasonSection.classList.remove('hidden');
-        }
-    }
-
-    showHitSection() {
-        const hitSection = document.getElementById('hit-section');
-        if (hitSection) {
-            hitSection.classList.remove('hidden');
-        }
-    }
 
     recordPoint() {
         if (!this.currentGame) return;
@@ -506,9 +491,7 @@ class TableTennisTracker {
             btn.classList.remove('selected');
         });
 
-        // Hide reason and hit sections
-        document.getElementById('reason-section').classList.add('hidden');
-        document.getElementById('hit-section').classList.add('hidden');
+        // Sections are now always visible, no need to hide them
     }
 
     showQuestionsPage() {
