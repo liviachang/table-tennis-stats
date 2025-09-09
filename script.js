@@ -291,10 +291,11 @@ class TableTennisTracker {
             yHit: null
         };
 
-        // Update button states
-        document.querySelectorAll('.winner-buttons .option-btn').forEach(btn => {
+        // Update button states - clear all winner buttons first
+        document.querySelectorAll('.winner-btn').forEach(btn => {
             btn.classList.remove('selected');
         });
+        // Then select the clicked one
         document.querySelector(`[data-winner="${winner}"]`).classList.add('selected');
 
         // Reason section is now always visible
