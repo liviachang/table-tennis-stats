@@ -203,7 +203,7 @@ header h1 {
     padding: 6px 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    background: white;
+    background: transparent;
     color: #333;
     font-size: 14px;
     font-weight: bold;
@@ -222,38 +222,29 @@ header h1 {
 }
 
 .option-btn.selected {
-    background: #007bff;
-    color: white;
-    border-color: #007bff;
+    background: #d3d3d3;
+    color: #333;
+    border-color: #999;
 }
 
 /* Winner buttons */
 .winner-btn {
     min-width: 40px;
+    background: transparent;
+    color: #333;
+    border-color: #ddd;
 }
 
-.winner-btn[data-winner="X"] {
+.winner-btn[data-winner="X"].selected {
     background: #007bff;
     color: white;
     border-color: #007bff;
 }
 
-.winner-btn[data-winner="X"].selected {
-    background: #004085;
-    color: white;
-    border-color: #004085;
-}
-
-.winner-btn[data-winner="Y"] {
+.winner-btn[data-winner="Y"].selected {
     background: #fd7e14;
     color: white;
     border-color: #fd7e14;
-}
-
-.winner-btn[data-winner="Y"].selected {
-    background: #cc5500;
-    color: white;
-    border-color: #cc5500;
 }
 
 /* Reason buttons */
@@ -285,33 +276,35 @@ header h1 {
 }
 
 .x-btn {
+    background: transparent;
+    color: #333;
+    border-color: #ddd;
+}
+
+.x-btn:hover {
+    background: #f8f9fa;
+}
+
+.x-btn.selected {
     background: #007bff;
     color: white;
     border-color: #007bff;
 }
 
-.x-btn:hover {
-    background: #0056b3;
-}
-
-.x-btn.selected {
-    background: #004085;
-    border-color: #004085;
-}
-
 .y-btn {
-    background: #fd7e14;
-    color: white;
-    border-color: #fd7e14;
+    background: transparent;
+    color: #333;
+    border-color: #ddd;
 }
 
 .y-btn:hover {
-    background: #e55a00;
+    background: #f8f9fa;
 }
 
 .y-btn.selected {
-    background: #cc5500;
-    border-color: #cc5500;
+    background: #fd7e14;
+    color: white;
+    border-color: #fd7e14;
 }
 
 /* Action Buttons */

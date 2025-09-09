@@ -36,14 +36,14 @@ class TableTennisTracker {
         });
 
         // Winner selection buttons
-        document.querySelectorAll('.winner-buttons .option-btn').forEach(btn => {
+        document.querySelectorAll('.winner-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 this.selectWinner(e.target.dataset.winner);
             });
         });
 
-        // Reason buttons (unified for both X and Y)
-        document.querySelectorAll('#reason-section .option-btn').forEach(btn => {
+        // Reason buttons
+        document.querySelectorAll('.reason-buttons .option-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 this.selectReason(e.target.dataset.reason);
             });
