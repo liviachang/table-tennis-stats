@@ -304,10 +304,10 @@ class TableTennisTracker {
         this.currentSelection.reason = reason;
         
         // Update button states
-        document.querySelectorAll('#reason-section .option-btn').forEach(btn => {
+        document.querySelectorAll('.reason-buttons .option-btn').forEach(btn => {
             btn.classList.remove('selected');
         });
-        document.querySelector(`#reason-section [data-reason="${reason}"]`).classList.add('selected');
+        document.querySelector(`.reason-buttons [data-reason="${reason}"]`).classList.add('selected');
         
         // Hit section is now always visible
     }
