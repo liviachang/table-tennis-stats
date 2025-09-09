@@ -99,6 +99,10 @@ class TableTennisTracker {
             points: [],
             playerScore: 0,
             opponentScore: 0,
+            matchScore: {
+                playerGames: 0,
+                opponentGames: 0
+            },
             stats: {
                 xWon: {
                     attack: 0,
@@ -125,6 +129,7 @@ class TableTennisTracker {
         };
 
         this.updateGameDisplay();
+        this.updateMatchScoreDisplay();
         this.showQuestionsPage();
         this.updateStats();
     }
@@ -269,6 +274,7 @@ class TableTennisTracker {
 
         // Update display
         this.updateScoreDisplay();
+        this.updateMatchScoreDisplay();
         this.updateStats();
     }
 
@@ -446,6 +452,13 @@ class TableTennisTracker {
         document.getElementById('live-opponent-score').textContent = this.currentGame.opponentScore;
     }
 
+    updateMatchScoreDisplay() {
+        const matchScoreElement = document.getElementById('match-score');
+        if (matchScoreElement) {
+            matchScoreElement.textContent = `${this.currentGame.matchScore.playerGames}-${this.currentGame.matchScore.opponentGames}`;
+        }
+    }
+
     updateStats() {
         if (!this.currentGame) return;
 
@@ -524,11 +537,40 @@ class TableTennisTracker {
         this.currentGame.duration = this.currentGame.endTime - this.currentGame.startTime;
         this.currentGame.winner = this.currentGame.playerScore > this.currentGame.opponentScore ? 'X' : 'Y';
 
+        // Update match score
+        if (this.currentGame.winner === 'X') {
+            this.currentGame.matchScore.playerGames++;
+        } else {
+            this.currentGame.matchScore.opponentGames++;
+        }
+
         this.gameHistory.push({...this.currentGame});
         this.saveGameHistory();
 
-        alert(`Game ended! Final score: ${this.currentGame.playerScore} - ${this.currentGame.opponentScore}`);
-        this.resetToSetup();
+        // Check if match is complete (best of 5 games = 3 wins)
+        const matchComplete = this.currentGame.matchScore.playerGames >= 3 || this.currentGame.matchScore.opponentGames >= 3;
+        
+        if (matchComplete) {
+            const matchWinner = this.currentGame.matchScore.playerGames >= 3 ? 'X' : 'Y';
+            alert(`Match completed! ${matchWinner} wins the match ${this.currentGame.matchScore.playerGames}-${this.currentGame.matchScore.opponentGames}`);
+            this.resetToSetup();
+        } else {
+            alert(`Game ended! Final score: ${this.currentGame.playerScore} - ${this.currentGame.opponentScore}. Match: ${this.currentGame.matchScore.playerGames}-${this.currentGame.matchScore.opponentGames}`);
+            // Continue to next game instead of resetting
+            this.prepareNextGame();
+        }
+    }
+
+    prepareNextGame() {
+        // Increment game number for next game
+        const nextGameNumber = this.currentGame.gameNumber + 1;
+        document.getElementById('game-number').value = nextGameNumber;
+        
+        // Start new game with same opponent and event
+        this.startNewGame();
+        
+        // Update match score display
+        this.updateMatchScoreDisplay();
     }
 
     saveGameHistory() {
