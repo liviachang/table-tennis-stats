@@ -253,12 +253,15 @@ class TableTennisTracker {
 
             this.currentGame.points.push(point);
 
-            // Update scores
-            if (point.winner === 'X') {
-                this.currentGame.playerScore++;
-            } else {
-                this.currentGame.opponentScore++;
-            }
+        // Update scores
+        if (point.winner === 'X') {
+            this.currentGame.playerScore++;
+        } else {
+            this.currentGame.opponentScore++;
+        }
+        
+        // Debug: Log current scores
+        console.log(`Point recorded: ${point.winner} wins. Score: X=${this.currentGame.playerScore}, Y=${this.currentGame.opponentScore}`);
 
             // Update stats
             this.updateGameStats(point);
