@@ -452,6 +452,12 @@ class TableTennisTracker {
         
         // Update game score
         document.getElementById('game-score').textContent = `${this.currentGame.playerScore} - ${this.currentGame.opponentScore}`;
+        
+        // Update opponent name in buttons
+        const opponentName = this.currentGame.opponentId;
+        document.getElementById('opponent-button').textContent = opponentName;
+        document.getElementById('opponent-fh').textContent = `(${opponentName}) FH`;
+        document.getElementById('opponent-bh').textContent = `(${opponentName}) BH`;
     }
 
     updateScoreDisplay() {
