@@ -27,7 +27,7 @@ header {
 
 header h1 {
     color: white;
-    font-size: 2.2rem;
+    font-size: 1.6rem;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
@@ -97,21 +97,21 @@ header h1 {
 
 /* Option buttons for point tracking */
 .option-btn {
-    padding: 16px 12px;
-    border: 3px solid #e2e8f0;
-    border-radius: 10px;
+    padding: 11px 8px;
+    border: 2px solid #e2e8f0;
+    border-radius: 7px;
     background: white;
     color: #4a5568;
-    font-size: 20px;
+    font-size: 13px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
-    min-height: 65px;
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
 .option-btn:hover {
@@ -131,8 +131,8 @@ header h1 {
 /* Button grids */
 .button-grid {
     display: grid;
-    gap: 6px;
-    margin-bottom: 10px;
+    gap: 4px;
+    margin-bottom: 6px;
 }
 
 .winner-buttons {
@@ -217,18 +217,18 @@ header h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 8px 0;
-    gap: 15px;
+    margin: 6px 0;
+    gap: 10px;
 }
 
 .player-score, .opponent-score {
     text-align: center;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 12px;
-    border-radius: 8px;
-    min-width: 70px;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    padding: 8px;
+    border-radius: 6px;
+    min-width: 50px;
+    box-shadow: 0 3px 8px rgba(102, 126, 234, 0.3);
 }
 
 .player-score h3, .opponent-score h3 {
@@ -237,7 +237,7 @@ header h1 {
 }
 
 .score {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
@@ -261,17 +261,17 @@ header h1 {
 }
 
 .question-section {
-    margin-bottom: 15px;
-    padding: 15px;
+    margin-bottom: 8px;
+    padding: 10px;
     background: #ffffff;
-    border-radius: 8px;
+    border-radius: 6px;
     border: 2px solid #e2e8f0;
 }
 
 .question-section h3 {
-    margin: 0 0 15px 0;
+    margin: 0 0 8px 0;
     color: #2d3748;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .point-tracking h3, .point-tracking h4 {
@@ -424,7 +424,7 @@ header h1 {
 
 .page-header h2 {
     margin: 0;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     color: #4a5568;
 }
 
