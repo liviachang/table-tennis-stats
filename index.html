@@ -44,91 +44,67 @@
 
         <!-- Questions Page -->
         <section id="questions-page" class="card hidden">
-            <div class="page-header">
-                <h2>Point Tracking</h2>
-                <div class="game-info">
-                    <p><strong>Opponent:</strong> <span id="current-opponent"></span></p>
-                    <p><strong>Event:</strong> <span id="current-event"></span></p>
-                    <p><strong>Game:</strong> <span id="current-game"></span></p>
+            <!-- Match Information -->
+            <div class="match-info">
+                <div class="info-row">
+                    <span class="label">Match:</span>
+                    <span class="value" id="match-info">A, U1350</span>
                 </div>
-            </div>
-
-            <!-- Match Score Display -->
-            <div class="match-score-display">
-                <div class="match-score">
-                    <h3>Match</h3>
-                    <div class="match-score-value" id="match-score">0-0</div>
+                <div class="info-row">
+                    <span class="label">Past games:</span>
+                    <span class="value" id="match-score">2 - 0</span>
                 </div>
-            </div>
-
-            <!-- Game Score Display -->
-            <div class="score-display">
-                <div class="player-score">
-                    <h3>You (X)</h3>
-                    <div class="score" id="player-score">0</div>
-                </div>
-                <div class="vs">VS</div>
-                <div class="opponent-score">
-                    <h3>Opponent (Y)</h3>
-                    <div class="score" id="opponent-score">0</div>
+                <div class="info-row">
+                    <span class="label">Game 3:</span>
+                    <span class="value" id="game-score">9 - 11</span>
                 </div>
             </div>
 
             <!-- Point Tracking Questions -->
             <div class="point-tracking">
                 <!-- Question 1: Who won -->
-                <div class="question-section">
-                    <h3>1. Who won the point?</h3>
-                    <div class="button-grid winner-buttons">
-                        <button class="option-btn" data-winner="X">X (You)</button>
-                        <button class="option-btn" data-winner="Y">Y (Opponent)</button>
+                <div class="question-row">
+                    <span class="label">Who won:</span>
+                    <div class="button-group">
+                        <button class="option-btn winner-btn" data-winner="X">X</button>
+                        <button class="option-btn winner-btn" data-winner="Y">Y</button>
                     </div>
                 </div>
 
                 <!-- Question 2: Reason -->
-                <div id="reason-section" class="question-section">
-                    <h3>2. Reason:</h3>
-                    <div class="button-grid reason-buttons">
+                <div class="question-row">
+                    <span class="label">Why:</span>
+                    <div class="button-group reason-buttons">
                         <button class="option-btn" data-reason="serve">Serve</button>
                         <button class="option-btn" data-reason="attack">Attack</button>
-                        <button class="option-btn" data-reason="miss-net">Miss net</button>
-                        <button class="option-btn" data-reason="miss-over">Miss over</button>
                         <button class="option-btn" data-reason="lucky">Lucky</button>
+                        <button class="option-btn" data-reason="miss-net">Miss Net</button>
+                        <button class="option-btn" data-reason="miss-over">Miss Over</button>
                     </div>
                 </div>
 
                 <!-- Question 3: Hit types -->
-                <div id="hit-section" class="question-section">
-                    <h3>3. Last hit:</h3>
-                    <div class="hit-types">
-                        <div class="hit-group">
-                            <label>X (You):</label>
-                            <div class="button-grid hit-buttons">
-                                <button class="option-btn" data-hit="X" data-type="FH">X FH</button>
-                                <button class="option-btn" data-hit="X" data-type="BH">X BH</button>
-                            </div>
-                        </div>
-                        <div class="hit-group">
-                            <label>Y (Opponent):</label>
-                            <div class="button-grid hit-buttons">
-                                <button class="option-btn" data-hit="Y" data-type="FH">Y FH</button>
-                                <button class="option-btn" data-hit="Y" data-type="BH">Y BH</button>
-                            </div>
-                        </div>
+                <div class="question-row">
+                    <span class="label">Hit:</span>
+                    <div class="button-group hit-buttons">
+                        <button class="option-btn hit-btn x-btn" data-hit="X" data-type="FH">(X) FH</button>
+                        <button class="option-btn hit-btn x-btn" data-hit="X" data-type="BH">(X) BH</button>
+                        <button class="option-btn hit-btn y-btn" data-hit="Y" data-type="FH">(Y) FH</button>
+                        <button class="option-btn hit-btn y-btn" data-hit="Y" data-type="BH">(Y) BH</button>
                     </div>
                 </div>
-
-                <div class="action-buttons">
-                    <button id="record-point" class="btn btn-success">Record</button>
-                    <button id="export-data" class="btn btn-secondary">Export</button>
-                    <button id="view-stats" class="btn btn-primary">Stats</button>
-                </div>
             </div>
 
-            <div class="game-controls">
-                <button id="end-game" class="btn btn-danger">End Game</button>
-                <button id="new-game" class="btn btn-secondary">New Game</button>
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button id="clear-selection" class="btn btn-clear">Clear</button>
+                <button id="record-point" class="btn btn-record">Record</button>
+                <button id="end-game" class="btn btn-end">End game</button>
+                <button id="export-data" class="btn btn-export">Export</button>
+                <button id="view-stats" class="btn btn-stats">Stats</button>
+                <button id="new-game" class="btn btn-new">New game</button>
             </div>
+
         </section>
 
         <!-- Stats Page -->

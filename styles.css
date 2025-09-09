@@ -6,23 +6,23 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.2;
+    background: #f5f5f5;
     color: #333;
-    font-size: 16px;
-}
-
-.container {
-    max-width: 100%;
-    margin: 0 auto;
+    padding: 10px;
 }
 
 /* Header */
 header {
     text-align: center;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 header h1 {
@@ -35,490 +35,356 @@ header h1 {
 .card {
     background: white;
     border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-1px);
-}
-
-.card h2 {
-    color: #4a5568;
-    margin-bottom: 8px;
-    font-size: 1.4rem;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 4px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
 }
 
 /* Form styles */
 .form-group {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 4px;
-    font-weight: 600;
+    margin-bottom: 5px;
+    font-weight: bold;
     color: #4a5568;
-    font-size: 15px;
 }
 
 .form-group input {
     width: 100%;
-    padding: 10px;
-    border: 2px solid #e2e8f0;
-    border-radius: 6px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+    padding: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
 /* Buttons */
 .btn {
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    min-height: 50px; /* Touch-friendly minimum size */
-}
-
-/* Option buttons for point tracking */
-.option-btn {
-    padding: 11px 8px;
-    border: 2px solid #e2e8f0;
-    border-radius: 7px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     background: white;
-    color: #4a5568;
-    font-size: 13px;
-    font-weight: 700;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
-    min-height: 44px;
-    display: flex;
+    transition: all 0.2s ease;
+    text-align: center;
+    min-height: 32px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
-.option-btn:hover {
-    border-color: #667eea;
-    background: #f7fafc;
-    transform: translateY(-1px);
-}
-
-.option-btn.selected {
-    background: #667eea;
-    color: white;
-    border-color: #667eea;
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-    transform: translateY(-2px);
-}
-
-/* Button grids */
-.button-grid {
-    display: grid;
-    gap: 4px;
-    margin-bottom: 6px;
-}
-
-.winner-buttons {
-    grid-template-columns: 1fr 1fr;
-}
-
-.reason-buttons {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.hit-buttons {
-    grid-template-columns: 1fr 1fr;
-}
-
-@media (max-width: 480px) {
-    .reason-buttons {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .option-btn {
-        font-size: 14px;
-        padding: 12px 8px;
-    }
+.btn:hover {
+    background: #f8f9fa;
+    border-color: #ccc;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #007bff;
     color: white;
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    border-color: #007bff;
 }
 
 .btn-success {
-    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    background: #28a745;
     color: white;
-}
-
-.btn-success:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(72, 187, 120, 0.4);
+    border-color: #28a745;
 }
 
 .btn-danger {
-    background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+    background: #dc3545;
     color: white;
-}
-
-.btn-danger:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(245, 101, 101, 0.4);
+    border-color: #dc3545;
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #a0aec0 0%, #718096 100%);
+    background: #6c757d;
     color: white;
-}
-
-.btn-secondary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(160, 174, 192, 0.4);
-}
-
-/* Game info */
-.game-info {
-    background: #f7fafc;
-    padding: 6px;
-    border-radius: 4px;
-    margin-bottom: 8px;
-    border-left: 3px solid #667eea;
-}
-
-.game-info p {
-    margin-bottom: 2px;
-    font-size: 13px;
-}
-
-/* Match score display */
-.match-score-display {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 6px 0;
-}
-
-.match-score {
-    text-align: center;
-    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 6px;
-    min-width: 80px;
-    box-shadow: 0 3px 8px rgba(74, 85, 104, 0.3);
-}
-
-.match-score h3 {
-    margin: 0 0 4px 0;
-    font-size: 10px;
-}
-
-.match-score-value {
-    font-size: 1.1rem;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-}
-
-/* Game score display */
-.score-display {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 6px 0;
-    gap: 10px;
-}
-
-.player-score, .opponent-score {
-    text-align: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 8px;
-    border-radius: 6px;
-    min-width: 50px;
-    box-shadow: 0 3px 8px rgba(102, 126, 234, 0.3);
-}
-
-.player-score h3, .opponent-score h3 {
-    margin-bottom: 4px;
-    font-size: 10px;
-}
-
-.score {
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-}
-
-.vs {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: #4a5568;
-    background: white;
-    padding: 6px 10px;
-    border-radius: 50%;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-}
-
-/* Point tracking */
-.point-tracking {
-    background: #f7fafc;
-    padding: 10px;
-    border-radius: 6px;
-    margin: 8px 0;
-}
-
-.question-section {
-    margin-bottom: 8px;
-    padding: 10px;
-    background: #ffffff;
-    border-radius: 6px;
-    border: 2px solid #e2e8f0;
-}
-
-.question-section h3 {
-    margin: 0 0 8px 0;
-    color: #2d3748;
-    font-size: 14px;
-}
-
-.point-tracking h3, .point-tracking h4 {
-    color: #4a5568;
-    margin-bottom: 12px;
-    font-size: 24px;
-    font-weight: 700;
-    text-align: center;
-}
-
-.radio-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.radio-group label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 8px 10px;
-    background: white;
-    border: 2px solid #e2e8f0;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-    font-weight: 500;
-    font-size: 12px;
-    min-height: 44px; /* Touch-friendly */
-}
-
-.radio-group label:hover {
-    border-color: #667eea;
-    background: #f7fafc;
-}
-
-.radio-group input[type="radio"] {
-    margin-right: 6px;
-    width: auto;
-}
-
-.radio-group input[type="radio"]:checked + span,
-.radio-group input[type="radio"]:checked {
-    color: #667eea;
-}
-
-.reason-section {
-    margin: 8px 0;
-    padding: 8px;
-    background: white;
-    border-radius: 4px;
-    border-left: 3px solid #48bb78;
-}
-
-.hit-types {
-    margin: 8px 0;
-    padding: 8px;
-    background: white;
-    border-radius: 4px;
-    border-left: 3px solid #f6ad55;
-}
-
-.hit-group {
-    margin-bottom: 6px;
-}
-
-.hit-group label:first-child {
-    font-weight: 600;
-    color: #4a5568;
-    margin-bottom: 4px;
-    display: block;
-    font-size: 14px;
-}
-
-/* Game controls */
-.game-controls {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-/* Stats display */
-.stats-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 6px;
-    margin-top: 8px;
-}
-
-.stat-card {
-    background: #f7fafc;
-    padding: 8px;
-    border-radius: 6px;
-    border-left: 3px solid #667eea;
-}
-
-.stat-card h3 {
-    color: #4a5568;
-    margin-bottom: 6px;
-    font-size: 14px;
-}
-
-.stat-value {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #667eea;
-    text-align: center;
-}
-
-.stat-details {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.stat-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2px 0;
-    border-bottom: 1px solid #e2e8f0;
-    font-size: 11px;
-}
-
-.stat-item:last-child {
-    border-bottom: none;
-}
-
-.stat-item span:first-child {
-    color: #4a5568;
-    font-weight: 500;
-}
-
-.stat-item span:last-child {
-    color: #667eea;
-    font-weight: bold;
-    font-size: 12px;
-}
-
-/* Page layout */
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #e2e8f0;
-}
-
-.page-header h2 {
-    margin: 0;
-    font-size: 1.1rem;
-    color: #4a5568;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin: 15px 0;
-}
-
-.action-buttons .btn {
-    flex: 1;
-    max-width: 180px;
-}
-
-/* Mobile responsive for buttons */
-@media (max-width: 480px) {
-    .reason-buttons {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-    }
-    
-    .option-btn {
-        font-size: 18px;
-        padding: 15px 10px;
-        min-height: 60px;
-    }
-    
-    .point-tracking h3, .point-tracking h4 {
-        font-size: 22px;
-    }
-    
-    .action-buttons {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .action-buttons .btn {
-        max-width: none;
-    }
+    border-color: #6c757d;
 }
 
 /* Test modes */
 .test-modes {
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 2px solid #e2e8f0;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #e2e8f0;
 }
 
 .test-modes h3 {
     color: #4a5568;
-    margin-bottom: 10px;
-    font-size: 16px;
+    margin-bottom: 8px;
+    font-size: 14px;
     text-align: center;
 }
 
 .test-buttons {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: 6px;
 }
 
 .test-buttons .btn {
+    font-size: 12px;
+    padding: 6px 8px;
+}
+
+/* Match Information */
+.match-info {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.label {
+    font-weight: bold;
+    color: #333;
+    min-width: 80px;
     font-size: 14px;
-    padding: 8px 12px;
+}
+
+.value {
+    color: #333;
+    font-size: 14px;
+}
+
+/* Point Tracking */
+.point-tracking {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.question-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    min-height: 32px;
+}
+
+.question-row:last-child {
+    margin-bottom: 0;
+}
+
+.question-row .label {
+    min-width: 80px;
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+}
+
+/* Button Groups */
+.button-group {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+/* Option Buttons */
+.option-btn {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    min-height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.option-btn:hover {
+    background: #f8f9fa;
+    border-color: #ccc;
+}
+
+.option-btn.selected {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Winner buttons */
+.winner-btn {
+    min-width: 40px;
+}
+
+.winner-btn[data-winner="X"].selected {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.winner-btn[data-winner="Y"].selected {
+    background: #fd7e14;
+    color: white;
+    border-color: #fd7e14;
+}
+
+/* Reason buttons */
+.reason-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    max-width: 300px;
+}
+
+.reason-buttons .option-btn {
+    font-size: 12px;
+    padding: 4px 6px;
+    min-height: 24px;
+}
+
+/* Hit buttons */
+.hit-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    max-width: 200px;
+}
+
+.hit-btn {
+    font-size: 12px;
+    padding: 4px 6px;
+    min-height: 24px;
+}
+
+.x-btn {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.x-btn:hover {
+    background: #0056b3;
+}
+
+.x-btn.selected {
+    background: #004085;
+    border-color: #004085;
+}
+
+.y-btn {
+    background: #fd7e14;
+    color: white;
+    border-color: #fd7e14;
+}
+
+.y-btn:hover {
+    background: #e55a00;
+}
+
+.y-btn.selected {
+    background: #cc5500;
+    border-color: #cc5500;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.btn-clear {
+    background: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+.btn-record {
+    background: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+.btn-end {
+    background: white;
+    color: #333;
+    border-color: #ddd;
+}
+
+.btn-export {
+    background: white;
+    color: #333;
+    border-color: #ddd;
+}
+
+.btn-stats {
+    background: white;
+    color: #333;
+    border-color: #ddd;
+}
+
+.btn-new {
+    background: white;
+    color: #333;
+    border-color: #ddd;
+}
+
+/* Stats Page */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.stat-card {
+    background: #f8f9fa;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.stat-card h3 {
+    color: #4a5568;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+.stat-item:last-child {
+    margin-bottom: 0;
+}
+
+.stat-label {
+    color: #6c757d;
+}
+
+.stat-value {
+    font-weight: bold;
+    color: #333;
 }
 
 /* Utility classes */
@@ -526,68 +392,34 @@ header h1 {
     display: none !important;
 }
 
-/* Mobile-specific optimizations */
+/* Mobile optimizations */
 @media (max-width: 480px) {
     body {
-        padding: 4px;
-        font-size: 13px;
+        padding: 5px;
+        font-size: 12px;
     }
     
     .card {
-        padding: 12px;
-        margin-bottom: 8px;
-    }
-    
-    .radio-group {
-        grid-template-columns: 1fr;
-        gap: 6px;
-    }
-    
-    .radio-group label {
-        padding: 10px 12px;
-        font-size: 13px;
-    }
-    
-    .score-display {
-        gap: 15px;
-    }
-    
-    .player-score, .opponent-score {
-        padding: 12px;
-        min-width: 70px;
-    }
-    
-    .score {
-        font-size: 1.8rem;
-    }
-    
-    .vs {
-        font-size: 0.9rem;
-        padding: 6px 10px;
-    }
-    
-    .game-controls {
-        flex-direction: column;
-        gap: 8px;
+        padding: 10px;
     }
     
     .btn {
-        width: 100%;
-        padding: 12px;
-    }
-}
-
-/* Landscape orientation for phones */
-@media (max-width: 768px) and (orientation: landscape) {
-    .score-display {
-        gap: 30px;
+        font-size: 12px;
+        padding: 6px 8px;
+        min-height: 28px;
     }
     
-    .player-score, .opponent-score {
-        min-width: 100px;
+    .option-btn {
+        font-size: 12px;
+        padding: 4px 6px;
+        min-height: 24px;
     }
     
-    .radio-group {
-        grid-template-columns: 1fr 1fr;
+    .reason-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .action-buttons {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

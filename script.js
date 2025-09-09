@@ -66,6 +66,11 @@ class TableTennisTracker {
             this.exportToCSV();
         });
 
+        // Clear selection button
+        document.getElementById('clear-selection').addEventListener('click', () => {
+            this.clearSelection();
+        });
+
         // Navigation buttons
         document.getElementById('view-stats').addEventListener('click', () => {
             this.showStatsPage();
@@ -273,8 +278,7 @@ class TableTennisTracker {
         });
 
         // Update display
-        this.updateScoreDisplay();
-        this.updateMatchScoreDisplay();
+        this.updateGameDisplay();
         this.updateStats();
     }
 
@@ -360,7 +364,7 @@ class TableTennisTracker {
 
         // Update stats
         this.updateGameStats(point);
-        this.updateScoreDisplay();
+        this.updateGameDisplay();
         this.updateStats();
         this.resetPointForm();
 
@@ -440,9 +444,14 @@ class TableTennisTracker {
     }
 
     updateGameDisplay() {
-        document.getElementById('current-opponent').textContent = this.currentGame.opponentId;
-        document.getElementById('current-event').textContent = this.currentGame.event;
-        document.getElementById('current-game').textContent = this.currentGame.gameNumber;
+        // Update match info
+        document.getElementById('match-info').textContent = `${this.currentGame.opponentId}, ${this.currentGame.event}`;
+        
+        // Update match score
+        document.getElementById('match-score').textContent = `${this.currentGame.matchScore.playerGames} - ${this.currentGame.matchScore.opponentGames}`;
+        
+        // Update game score
+        document.getElementById('game-score').textContent = `${this.currentGame.playerScore} - ${this.currentGame.opponentScore}`;
     }
 
     updateScoreDisplay() {
@@ -508,6 +517,10 @@ class TableTennisTracker {
         });
 
         // Sections are now always visible, no need to hide them
+    }
+
+    clearSelection() {
+        this.resetPointForm();
     }
 
     showQuestionsPage() {
